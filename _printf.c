@@ -18,9 +18,8 @@ int _printf(const char *format, ...)
 		{'c', print_char},
 		{'%', print_per}
 		/*
-		 * {'i', print_int},
-		 * {'d', print_int}
-		*/
+		 * {'i', print_int}
+		 */
 	};
 
 	va_start(args, format);
