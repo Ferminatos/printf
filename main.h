@@ -1,38 +1,35 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+#include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 
 /**
- * struct vtype - struct vtype
- * @tp: tp
- * @f: function
+ * struct print_a - A struct that has a pointer character and a pointer
+ * to a function
+ * @s: a character pointer
+ * @f: a function pointer
  */
 
-typedef struct vtype
+typedef struct print_a
 {
+	char s;
+	int (*f)();
 
-	char tp;
+} print_a_t;
 
-	void (*f)();
-
-} vtype_t;
+int check_formatter(va_list args, const char *format, print_a_t print_a[]);
 
 int _printf(const char *format, ...);
 
-void print_char(va_list valist);
+int _putchar(char c);
 
-void print_string(va_list valist);
+int print_str(va_list args);
 
-void _write_buffer(char *buffer, int *index);
+int print_char(va_list args);
 
-void reset_buffer(char buffer[]);
+void a_struct(void);
 
-void format_s(va_list valist, char *buffer, int *index);
-
-void format_c(va_list valist, char *buffer, int *index);
-
-void format_perc(va_list valist, char *buffer, int *index);
-
+int print_per(int p);
 #endif

@@ -1,51 +1,30 @@
 #include "main.h"
 
 /**
- * _printf - function that prints based on format specifier
- * @format: takes in format specifier
- * Return: return pointer to index
+ * _printf - Remaking the printf function in the standard input output library
+ * @format: Detects what format the arguments come in as
+ * Return: The number of characters to be printed
  */
 
 int _printf(const char *format, ...)
 {
-	char buffer[1024];
-	int i, j = 0, a = 0, *index = &a;
-	va_list valist;
+	va_list args;
+	int chars;
 
-	vtype_t spec[] = {
-		{'c', format_c}, {'s', format_s}, {'%', format_perc}
+	print_a_t print_a[] = {
+		{'s', print_str},
+		{'c', print_char},
+		{'%', print_per},
 	};
-	if (!format)
-		return (-1);
-	va_start(valist, format);
-	for (i = 0; format[i] != '\0'; i++)
-	{
-		for (; format[i] != '%' && format[i] != '\0'; *index += 1, i++)
-		{
-			if (*index == 1024)
-			{
-				_write_buffer(buffer, index);
-				reset_buffer(buffer);
-				*index = 0;
-			}
-			buffer[*index] = format[i];
-		}
-		if (format[i] == '\0')
-			break;
-		if (format[i] == '%')
-		{	i++;
-			for (j = 0; spec[j].tp != '\0'; j++)
-			{
-				if (format[i] == spec[j].tp)
-				{	spec[j].f(valist, buffer, index);
-					break;
-				}
-			}
-		}
-	}
-	va_end(valist);
-	buffer[*index] = '\0';
-	_write_buffer(buffer, index);
 
-	return (*index);
+	va_start(args, format);
+	chars = 0;
+
+	if (format == NULL || args == NULL)
+		return (chars);
+
+	chars = check_formatter(args, format, print_a);
+	va_end(args);
+
+	return (chars);
 }
