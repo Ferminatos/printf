@@ -21,6 +21,10 @@ typedef struct vtype
 
 int _printf(const char *format, ...);
 
+void print_char(va_list valist);
+
+void print_string(va_list valist);
+
 void _write_buffer(char *buffer, int *index);
 
 void reset_buffer(char buffer[]);
