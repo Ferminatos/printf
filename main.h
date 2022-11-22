@@ -32,6 +32,7 @@ int print_char(va_list args);
 int print_per(int p);
 
 /*
+ * test
  * int print_number(int n);
  * int print_int(va_list args);
  */
