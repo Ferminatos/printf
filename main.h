@@ -33,6 +33,8 @@ int print_str(va_list args);
 
 int print_char(va_list args);
 
+int print_number(int n);
+
 int print_per(int p);
 
 void a_struct(void);
