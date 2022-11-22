@@ -5,12 +5,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-/**
- * struct print_a - A struct that has a pointer character and a pointer
- * to a function
- * @s: a character pointer
- * @f: a function pointer
- */
 
 typedef struct print_a
 {
