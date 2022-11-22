@@ -16,10 +16,9 @@ int _printf(const char *format, ...)
 	print_a_t print_a[] = {
 		{'s', print_str},
 		{'c', print_char},
-		{'%', print_per}
-		/*
-		 * {'i', print_int}
-		 */
+		{'%', print_per},
+		{'i', print_int},
+		{'d', print_int}
 	};
 
 	va_start(args, format);
