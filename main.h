@@ -38,5 +38,4 @@ int print_number(int n);
 int print_per(int p);
 
 void a_struct(void);
-
 #endif
