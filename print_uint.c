@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_int - A function that prints out integers
+ * print_uint - A function that prints out integers
  * @args: a variable print that takes a varrying amount of function arguments
  * Return: Charcter
  */
@@ -27,8 +27,7 @@ int print_uint(va_list args)
 	{
 		rem = n % 10;
 		n = n / 10;
-
-		str[len - (i + 1)] = rem + '0';
+		_putchar(rem);
 		chars++;
 	}
 
