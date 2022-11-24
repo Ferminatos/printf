@@ -19,10 +19,13 @@ int _printf(const char *format, ...)
 		{'%', print_per},
 		{'i', print_int},
 		{'d', print_int},
+		{'u', print_uint},
 		{'o', print_oct},
 		{'x', print_x},
 		{'X', print_X},
+		{'p', print_add},
 		{'r', print_rev},
+		{'R', print_R},
 		{'\0', NULL}
 	};
 

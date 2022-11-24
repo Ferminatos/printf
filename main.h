@@ -12,8 +12,6 @@
  * @f: a function pointer
  */
 
-
-
 typedef struct print_a
 {
 	char s;
@@ -39,11 +37,21 @@ int print_per(int p);
 
 void a_struct(void);
 
-int print_rev(va_list args);
+int print_uint(va_list args);
+
+char *utos(char str[], unsigned int num);
+
+int num_len(int num);
 
 int print_oct(va_list args);
 
 int print_x(va_list args);
 
 int print_X(va_list args);
+
+int print_add(va_list args);
+
+int print_rev(va_list args);
+
+int print_R(va_list args);
 #endif
