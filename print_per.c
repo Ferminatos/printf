@@ -2,14 +2,15 @@
 
 /**
  * print_per - a function that accounts for %% as an input
- * @p: A parameter that stores a % and prints it
  * Return: Return the % character
  */
 
-int print_per(int p)
+int print_per()
 {
-	p = '%';
-	_putchar(p);
+	int chars = 0;
 
-	return (1);
+	_putchar('%');
+	chars++;
+
+	return (chars);
 }

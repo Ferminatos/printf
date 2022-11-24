@@ -19,6 +19,7 @@ int _printf(const char *format, ...)
 		{'%', print_per},
 		{'i', print_int},
 		{'d', print_int},
+		{'b', print_bin},
 		{'u', print_uint},
 		{'o', print_oct},
 		{'x', print_x},
@@ -34,12 +35,13 @@ int _printf(const char *format, ...)
 
 	if (format == NULL || args == NULL)
 		return (chars);
+	else
+	{
+		chars = check_formatter(args, format, print_a);
+		va_end(args);
 
-	chars = check_formatter(args, format, print_a);
-	va_end(args);
-
-	return (chars);
-
+		return (chars);
+	}
 }
 
 /**
