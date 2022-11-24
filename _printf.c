@@ -18,7 +18,12 @@ int _printf(const char *format, ...)
 		{'c', print_char},
 		{'%', print_per},
 		{'i', print_int},
-		{'d', print_int}
+		{'d', print_int},
+		{'o', print_oct},
+		{'x', print_x},
+		{'X', print_X},
+		{'r', print_rev},
+		{'\0', NULL}
 	};
 
 	va_start(args, format);
@@ -58,7 +63,7 @@ int check_formatter(va_list args, const char *format, print_a_t print_a[])
 		{
 			i++;
 
-			for (j = 0; j < 7; j++)
+			for (j = 0; print_a[j].s != '\0'; j++)
 			{
 				if (print_a[j].s == format[i])
 				{

@@ -38,4 +38,12 @@ int print_number(int n);
 int print_per(int p);
 
 void a_struct(void);
+
+int print_rev(va_list args);
+
+int print_oct(va_list args);
+
+int print_x(va_list args);
+
+int print_X(va_list args);
 #endif
