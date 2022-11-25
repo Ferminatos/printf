@@ -2,15 +2,13 @@
 
 /**
  * print_per - a function that accounts for %% as an input
+ * @args: argument passed
  * Return: Return the % character
  */
 
-int print_per()
+int print_per(va_list args)
 {
-	int chars = 0;
+	(void)args;
 
-	_putchar('%');
-	chars++;
-
-	return (chars);
+	return (_putchar('%'));
 }

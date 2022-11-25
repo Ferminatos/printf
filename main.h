@@ -33,7 +33,7 @@ int print_char(va_list args);
 
 int print_number(int n);
 
-int print_per();
+int print_per(va_list args);
 
 int print_bin(va_list args);
 

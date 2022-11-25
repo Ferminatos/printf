@@ -34,14 +34,12 @@ int _printf(const char *format, ...)
 	chars = 0;
 
 	if (format == NULL || args == NULL)
-		return (chars);
-	else
-	{
-		chars = check_formatter(args, format, print_a);
-		va_end(args);
+		return (-1);
 
-		return (chars);
-	}
+	chars = check_formatter(args, format, print_a);
+	va_end(args);
+
+	return (chars);
 }
 
 /**
