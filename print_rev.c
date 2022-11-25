@@ -3,10 +3,11 @@
 /**
  * print_rev - a function that prints the string in reverse
  * @args: a variable that takes in a varrying amount of function arguments
+ * @params: the parameters struct
  * Return: The number of characters
  */
 
-int print_rev(va_list args)
+int print_rev(va_list args, params_t *params)
 {
 	char *s;
 	int i, j, chars;
@@ -14,7 +15,8 @@ int print_rev(va_list args)
 	chars = 0;
 
 	s = va_arg(args, char *);
-
+	(void)params;
+	
 	for (i = 0; s[i] != '\0'; i++)
 		;
 
@@ -26,8 +28,3 @@ int print_rev(va_list args)
 
 	return (chars);
 }
-/**
- * print_rev - A function that prints the string in reverse
- * @args: A variable that takes in a varying amount of function argumnets
- * Ruturn: The number of characters
- */

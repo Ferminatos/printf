@@ -3,10 +3,11 @@
 /**
  * print_R - prints the rot13'ed string
  * @args: argument passed
+ * @params: the parameters struct
  * Return: number of string
  */
 
-int print_R(va_list args)
+int print_R(va_list args, params_t *params)
 {
 	char *s;
 	int i, j, chars;
@@ -16,6 +17,7 @@ int print_R(va_list args)
 
 	chars = 0;
 	s = va_arg(args, char *);
+	(void)params;
 
 	for (i = 0; s[i] != '\0'; i++, chars += 1)
 	{
@@ -35,8 +37,3 @@ int print_R(va_list args)
 
 	return (chars);
 }
-/**
- * print_R - prints the rot13'ed string
- * @args: argument passed
- * Return: number of string
- */

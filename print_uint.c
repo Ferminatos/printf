@@ -25,9 +25,3 @@ int print_uint(va_list args, params_t *params)
 
 	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }
-/**
- * print_unit - A function that prints out unsigned integers
- * @args: a variable print that takes a varrying amount of function argumnets
- * @params: the parameters struct
- * Return: The number of characters
- */

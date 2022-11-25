@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <limits.h>
+#include <stdlib.h>
 
 #define OUTPUT_BUF_SIZE 1024
 #define BUF_FLUSH -1
@@ -56,22 +58,24 @@ typedef struct parameters
 } params_t;
 
 /**
- * struct print_a - A struct that has a pointer character and a pointer
+ * struct specifier - A struct that has a pointer character and a pointer
  * to a function
  * @s: a character pointer
  * @f: a function pointer
  */
 
-typedef struct print_a
+typedef struct specifier
 {
-	char s;
-	int (*f)();
+	char *s;
+	int (*f)(va_list, params_t *);
 
-} print_a_t;
+} specifier_t;
 
 int _printf(const char *format, ...);
 
-int _putchar(char c);
+int _putchar(int c);
+
+int _puts(char *str);
 
 int print_int(va_list args, params_t *params);
 
@@ -79,7 +83,7 @@ int print_str(va_list args, params_t *params);
 
 int print_char(va_list args, params_t *params);
 
-int print_number(int n);
+char *convert(long int num, int base, int flags, params_t *params);
 
 int print_per(va_list args, params_t *params);
 
@@ -99,10 +103,34 @@ int print_S(va_list args, params_t *params);
 
 int print_add(va_list args, params_t *params);
 
-int check_flag(char *s, params_t *params)
+int _isdigit(int c);
 
-int print_rev(va_list args);
+int _strlen(char *s);
 
-int print_R(va_list args);
+int print_number(char *str, params_t *params);
+
+int print_number_right_shift(char *str, params_t *params);
+
+int print_number_left_shift(char *str, params_t *params);
+
+int check_flag(char *s, params_t *params);
+
+int (*get_specifier(char *s))(va_list args, params_t *params);
+
+int get_print_func(char *s, va_list args, params_t *params);
+
+int check_modifier(char *s, params_t *params);
+
+char *get_width(char *s, params_t *params, va_list ap);
+
+void init_params(params_t *params, va_list args);
+
+char *get_precision(char *p, params_t *params, va_list args);
+
+int print_from_to(char *start, char *stop, char *except);
+
+int print_rev(va_list args, params_t *params);
+
+int print_R(va_list args, params_t *params);
 
 #endif

@@ -24,7 +24,6 @@ int print_str(va_list args, params_t *params)
 
 	if (params->precision < pad)
 		j = pad = params->precision;
-
 	if (params->minus_flag)
 	{
 		if (params->precision != UINT_MAX)
@@ -35,7 +34,6 @@ int print_str(va_list args, params_t *params)
 		else
 			chars += _puts(str);
 	}
-
 	while (j++ < params->width)
 		chars += _putchar(pad_char);
 

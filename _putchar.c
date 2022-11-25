@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include "main.h"
 
 /**
  * _putchar - writes the character c to stdout
@@ -22,7 +22,7 @@ int _putchar(int c)
 	if (c != BUF_FLUSH)
 		buf[i++] = c;
 
-	return (1);	
+	return (1);
 }
 
 /**

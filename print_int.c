@@ -22,9 +22,3 @@ int print_int(va_list args, params_t *params)
 
 	return (print_number(convert(l, 10, 0, params), params));
 }
-/**
- * print_int - A function that prints out integers
- * @args: a variable print that takes a varrying amount of function argumnets
- * @params: the parameters struct
- * Return: Character
- */
