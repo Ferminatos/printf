@@ -32,3 +32,9 @@ int print_oct(va_list args, params_t *params)
 
 	return (c += print_number(str, params));
 }
+/**
+ * print_oct - a fuction that prints out octal number
+ * @args: a list of all the arguments that the function will take
+ * @params: The parametrs struct
+ * Return: The number of characters
+ */ 
