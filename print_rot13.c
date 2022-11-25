@@ -35,3 +35,8 @@ int print_R(va_list args)
 
 	return (chars);
 }
+/**
+ * print_R - prints the rot13'ed string
+ * @args: argument passed
+ * Return: number of string
+ */
