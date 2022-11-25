@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
  * print_bin - print binary
@@ -10,21 +9,14 @@
 
 int print_bin(va_list args, params_t *params)
 {
-	unsigned long int n = va_arg(args, unsigned long int);
-	char *str;
+	unsigned int n = va_arg(ap, unsigned int);
+	char *str = convert(n, 2, CONVERT_UNSIGNED, params);
+	int c = 0;
 
-	if (!n)
-		return (_puts("(nil)"));
+	if (params->hashtag_flag && n)
+		*--str = '0';
 
-	str = convert(n, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
-	*--str = 'x';
-	*--str = '0';
+	params->unsign = 1;
 
-	return (print_number(str, params));
+	return (c += print_number(str, params));
 }
-/**
- * print_bin - print binary
- * @args: arrguments passed
- * @params: the parameters struct
- * Return: number of characters
- */
