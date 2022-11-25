@@ -26,3 +26,8 @@ int print_rev(va_list args)
 
 	return (chars);
 }
+/**
+ * print_rev - A function that prints the string in reverse
+ * @args: A variable that takes in a varying amount of function argumnets
+ * Ruturn: The number of characters
+ */
