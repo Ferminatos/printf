@@ -22,3 +22,9 @@ int print_add(va_list args, params_t *params)
 
 	return (print_number(str, params));
 }
+/**
+ * print_add - prints a memory address
+ * @args: argument passed
+ * @params: the parameters struct
+ * Return: number of characters
+ */
