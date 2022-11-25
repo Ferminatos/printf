@@ -4,76 +4,59 @@
 /**
  * print_x - prints hexdecimal in lowercase
  * @args: argument passed
+ * @params: the parameters struct
  * Return: number of characters
  */
 
-int print_x(va_list args)
+int print_x(va_list args, params_t *params)
 {
-	unsigned int j;
-	int i, chars;
-	char *hexvalues;
-	char *hex;
+	unsigned long l;
+	int c = 0;
+	char *str;
 
-	chars = 0;
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(args, unsigned long);
 
-	j = va_arg(args, int);
-	hexvalues = "0123456789abcdef";
-	hex = malloc(9 * sizeof(char));
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(args, unsigned int);
 
-	if (hex == NULL)
-		return (chars);
+	else
+		l = (unsigned int)va_arg(args, unsigned int);
 
-	for (i = 0; j != 0; i++)
+	str = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+
+	if (params->hashtag_flag && l)
 	{
-		hex[i] = hexvalues[j % 16];
-		j /= 16;
+		*--str = 'x';
+		*--str = '0';
+
 	}
+	params->unsign = 1;
 
-	for (i--; i >= 0; i--)
-	{
-		_putchar(hex[i]);
-		chars++;
-	}
-
-	free(hex);
-
-	return (chars);
+	return (c += print_number(str, params));
 }
 
 /**
  * print_X - prints hexdecimal in uppercase
  * @args: argument passed
+ * @params: the parameters struct
  * Return: number of characters
  */
 
-int print_X(va_list args)
+int print_X(va_list args, params_t *params)
 {
-	unsigned int j;
-	int i, chars;
-	char *hexvalues;
-	char *hex;
+	unsigned long l;
 
-	chars = 0;
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(args, unsigned long);
 
-	j = va_arg(args, int);
-	hexvalues = "0123456789ABCDEF";
-	hex = malloc(9 * sizeof(char));
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(args, unsigned int);
 
-	if (hex == NULL)
-		return (chars);
+	else
+		l = (unsigned int)va_arg(args, unsigned int);
 
-	for (i = 0; j != 0; i++)
-	{
-		hex[i] = hexvalues[j % 16];
-		j /= 16;
-	}
+	params->unsign = 1;
 
-	for (i--; i >= 0; i--)
-	{
-		_putchar(hex[i]);
-		chars++;
-	}
-	free(hex);
-
-	return (chars);
+	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }

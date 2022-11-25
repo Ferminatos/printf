@@ -4,39 +4,31 @@
 /**
  * print_oct - a function that prints out octal numbers
  * @args: a list of all the arguments that the function will take
+ * @params: the parameters struct
  * Return: The number of characters
  */
 
-int print_oct(va_list args)
+int print_oct(va_list args, params_t *params)
 {
-	unsigned int j;
-	int i, chars;
-	char *octvalues;
-	char *oct;
+	unsigned long l;
+	char *str;
+	int c = 0;
 
+	if (params->l_modifier)
+		l = (unsigned long)va_arg(args, unsigned long);
 
-	chars = 0;
+	else if (params->h_modifier)
+		l = (unsigned short int)va_arg(args, unsigned int);
 
-	j = va_arg(args, int);
-	octvalues = "0123456789ABCDEF";
-	oct = malloc(12 * sizeof(char));
+	else
+		l = (unsigned int)va_arg(args, unsigned int);
 
-	if (oct == NULL)
-		return (chars);
+	str = convert(l, 8, CONVERT_UNSIGNED, params);
 
-	for (i = 0; j != 0; i++)
-	{
-		oct[i] = octvalues[j % 8];
-		j /= 8;
-	}
+	if (params->hashtag_flag && l)
+		*--str = '0';
 
-	for (i--; i >= 0; i--)
-	{
+	params->unsign = 1;
 
-		_putchar(oct[i]);
-		chars++;
-	}
-	free(oct);
-
-	return (chars);
+	return (c += print_number(str, params));
 }

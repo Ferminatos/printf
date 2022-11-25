@@ -11,89 +11,162 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int chars;
+	int chars = 0;
+	char *p, *start;
 
-	print_a_t print_a[] = {
-		{'s', print_str},
-		{'c', print_char},
-		{'%', print_per},
-		{'i', print_int},
-		{'d', print_int},
-		{'b', print_bin},
-		{'u', print_uint},
-		{'o', print_oct},
-		{'x', print_x},
-		{'X', print_X},
-		{'p', print_add},
-		{'r', print_rev},
-		{'R', print_R},
-		{'\0', NULL}
-	};
+	params_t params = PARAMS_INIT;
 
 	va_start(args, format);
-	chars = 0;
 
-	if (format == NULL || args == NULL)
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
+	
+	for (p = (char *)format; *p; p++)
+	{
+		init_params(&params, args);
 
-	chars = check_formatter(args, format, print_a);
+		if (*p != '%')
+		{
+			chars += _putchar(*p);
+			continue;
+		}
+
+		start = p;
+		p++;
+
+		while (check_flag(p, &params))
+		{
+			p++;
+		}
+
+		p = get_width(p, &params, args);
+		p = get_precision(p, &params, args);
+
+		if (get_modifier(p, &params))
+			p++;
+
+		if (!get_specifier(p))
+			chars += print_from_to(start, p,
+
+		params.l_modifier || params.h_modifier ? p - 1 : 0);
+
+		else
+			chars += get_print_func(p, args, &params);
+	}
+
 	va_end(args);
 
 	return (chars);
 }
 
 /**
- * check_formatter - Function that checks if the character pointer is NULL, and
- * if it is NULL, it will return the number of charaters which is 0. Verifies
- * if the first character is a "%", if it is, move to the next character,
- * checks the array of structs, if they match, run the function. If not, print
- * the % and the character.
- * @args: a pointer that is initiated by va_list
- * @format: a pointer variable that points to what's being passed to _printf
- * @print_a: The array of structs that is initated in the _printf function
- * Return: The number of characters that was printed
+ * get_print_func - finds the format func
+ * @s: the format string
+ * @args: argument pointer
+ * @params: the parameters struct
+ * Return: the number of bytes printed
  */
 
-int check_formatter(va_list args, const char *format, print_a_t print_a[])
+int get_print_func(char *s, va_list args, params_t *params)
 {
-	int formatter, i, j, chars;
+	int (*f)(va_list, params_t *) = get_specifier(s);
 
-	formatter = i = j = chars = 0;
+	if (f)
+		return (f(args, params));
 
-	for (i = 0; format != NULL && format[i] != '\0'; i++)
+	return (0);
+}
+
+/**
+ * check_flag - check for flag
+ * @str: the format string
+ * @params: the parameters struct
+ * Return: if flag was valid or not
+ */
+
+int check_flag(char *str, params_t *params)
+{
+	int i = 0;
+
+	switch (*str)
 	{
-		if (format[i] == '%')
-		{
-			i++;
+	case '+':
+		i = params->plus_flag = 1;
+		break;
 
-			for (j = 0; print_a[j].s != '\0'; j++)
-			{
-				if (print_a[j].s == format[i])
-				{
-					chars += (print_a[j].f(args));
-					formatter = 1;
-				}
-			}
+	case ' ':
+		i = params->space_flag = 1;
+		break;
 
-			if (formatter == 0)
-			{
-				i--;
-				_putchar(format[i]);
-				i++;
-				_putchar(format[i]);
-				chars += 2;
-			}
-		}
+	case '#':
+		i = params->hashtag_flag = 1;
+		break;
 
-		else
-		{
-			_putchar(format[i]);
-			chars++;
-		}
+	case '-':
+		i = params->minus_flag = 1;
+		break;
+
+	case '0':
+		i = params->zero_flag = 1;
+		break;
+
 	}
 
-	return (chars);
+	return (i);
 }
+
+/**
+ * check_modifier - checks for modifier
+ * @str: the format string
+ * @params: the parameters struct
+ * Return: if modifier was valid or not
+ */
+
+int check_modifier(char *str, params_t *params)
+{
+	int i = 0;
+
+	switch (*str)
+	{
+	case 'h':
+		i = params->h_modifier = 1;
+		break;
+	case 'l':
+		i = params->l_modifier = 1;
+		break;
+	}
+
+	return (i);
+}
+
+/**
+ * get_width - gets the width from the format string
+ * @str: the format string
+ * @params: the parameters struct
+ * @args: argument passed
+ * Return: new pointer
+ */
+
+char *get_width(char *str, params_t *params, va_list args)
+{
+	int i = 0;
+
+	if (*str == '*')
+	{
+		i = va_arg(args, int);
+		str++;
+	}
+
+	else
+	{
+		while (_isdigit(*str))
+			i = i * 10 + (*str++ - '0');
+	}
+	params->width = i;
+
+	return (str);
+}
+

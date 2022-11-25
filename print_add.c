@@ -4,48 +4,21 @@
 /**
  * print_add - print a memory address
  * @args: argument passed
+ * @params: the parameters struct
  * Return: number of characters
  */
 
-int print_add(va_list args)
+int print_add(va_list args, params_t *params)
 {
-	unsigned long int j;
-	int i, chars;
-	char *hexvalues;
-	char *hex;
-	void *a;
-	char *b;
+	unsigned long int n = va_arg(args, unsigned long int);
+	char *str;
 
-	chars = 0;
-	a = va_arg(args, void *);
-	b = "(nil)";
+	if (!n)
+		return (_puts("(nil)"));
 
-	if (a == NULL)
-	{
-		for (i = 0; i < 5; i++, chars += 1)
-			_putchar(b[i]);
-		return (chars);
-	}
-	j = (unsigned long int)a;
-	hexvalues = "0123456789abcdef";
-	hex = malloc(14 * sizeof(char));
+	str = convert(n, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+	*--str = 'x';
+	*--str = '0';
 
-	if (hex == NULL)
-		return (chars);
-	for (i = 0; j != 0; i++)
-	{
-		hex[i] = hexvalues[j % 16];
-		j /= 16;
-	}
-	i += 2;
-	hex[13] = '0';
-	hex[12] = 'x';
-	for (i--; i >= 0; i--)
-	{
-		_putchar(hex[i]);
-		chars++;
-	}
-	free(hex);
-
-	return (chars);
+	return (print_number(str, params));
 }
