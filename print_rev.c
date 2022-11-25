@@ -16,7 +16,7 @@ int print_rev(va_list args, params_t *params)
 
 	s = va_arg(args, char *);
 	(void)params;
-	
+
 	for (i = 0; s[i] != '\0'; i++)
 		;
 

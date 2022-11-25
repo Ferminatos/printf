@@ -53,7 +53,7 @@ int print_str(va_list args, params_t *params)
 
 /**
  * print_S - custom string format specifier
- * @ap: argument passed
+ * @args: argument passed
  * @params: the parameters struct
  * Return: number chars printed
  */
