@@ -60,3 +60,9 @@ int print_X(va_list args, params_t *params)
 
 	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
 }
+/**
+ * print_X - prints hexadecimal in uppercase
+ * @args: argument passed
+ * @params: the parameter struct
+ * Return: number of characters
+ */
