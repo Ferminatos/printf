@@ -22,3 +22,9 @@ int print_bin(va_list args, params_t *params)
 
 	return (print_number(str, params));
 }
+/**
+ * print_bin - print binary
+ * @args: arrguments passed
+ * @params: the parameters struct
+ * Return: number of characters
+ */
