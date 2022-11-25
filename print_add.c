@@ -23,8 +23,8 @@ int print_add(va_list args)
 	if (a == NULL)
 	{
 		for (i = 0; i < 5; i++, chars += 1)
-			(_putchar(b[i]);
-			return (chars);
+			_putchar(b[i]);
+		return (chars);
 	}
 	j = (unsigned long int)a;
 	hexvalues = "0123456789abcdef";
