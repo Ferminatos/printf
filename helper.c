@@ -27,6 +27,12 @@ int (*get_specifier(char *s))(va_list args, params_t *params)
 
 	};
 
+/**
+ * get_specifiers - finds the format func
+ * @s: the format string
+ * Return: the number og bytes printed
+ */
+	
 	int i = 0;
 
 	while (specifiers[i].specifier)
