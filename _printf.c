@@ -36,6 +36,9 @@ int _printf(const char *format, ...)
 	if (format == NULL || args == NULL)
 		return (-1);
 
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+
 	chars = check_formatter(args, format, print_a);
 	va_end(args);
 
