@@ -45,6 +45,8 @@ int print_x(va_list args, params_t *params)
 int print_X(va_list args, params_t *params)
 {
 	unsigned long l;
+	int c = 0;
+	char *str;
 
 	if (params->l_modifier)
 		l = (unsigned long)va_arg(args, unsigned long);
@@ -55,7 +57,14 @@ int print_X(va_list args, params_t *params)
 	else
 		l = (unsigned int)va_arg(args, unsigned int);
 
+	str = convert(l, 16, CONVERT_UNSIGNED, params);
+
+	if (params->hashtag_flag && l)
+	{
+		*--str = 'X';
+		*--str = '0';
+	}
 	params->unsign = 1;
 
-	return (print_number(convert(l, 10, CONVERT_UNSIGNED, params), params));
+	return (c += print_number(str, params));
 }
