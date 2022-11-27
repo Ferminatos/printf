@@ -12,43 +12,39 @@ int print_str(va_list args, params_t *params)
 	char *str = va_arg(args, char *), pad_char = ' ';
 	unsigned int pad = 0, chars = 0, i = 0, j;
 
+
 	(void)params;
-
 	switch ((int)(!str))
-	{
-		case 1:
-			str = NULL_STRING;
-	}
+	case 1:
+		str = NULL_STRING;
 
-	j = pad = _strlen(str);
+		j = pad = _strlen(str);
+		if (params->precision < pad)
+			j = pad = params->precision;
 
-	if (params->precision < pad)
-		j = pad = params->precision;
-	if (params->minus_flag)
-	{
-		if (params->precision != UINT_MAX)
+		if (params->minus_flag)
 		{
-			for (i = 0; i < pad; i++)
-				chars += _putchar(*str++);
-		}
-		else
-			chars += _puts(str);
-	}
-	while (j++ < params->width)
-		chars += _putchar(pad_char);
+			if (params->precision != UINT_MAX)
+				for (i = 0; i < pad; i++)
+					chars += _putchar(*str++);
 
-	if (!params->minus_flag)
-	{
-		if (params->precision != UINT_MAX)
-		{
-			for (i = 0; i < pad; i++)
-				chars += _putchar(*str++);
+			else
+				chars += _puts(str);
 		}
 
-		else
-			chars += _puts(str);
-	}
-	return (chars);
+		while (j++ < params->width)
+			chars += _putchar(pad_char);
+
+		if (!params->minus_flag)
+		{
+			if (params->precision != UINT_MAX)
+				for (i = 0; i < pad; i++)
+					chars += _putchar(*str++);
+			else
+				chars += _puts(str);
+		}
+
+		return (chars);
 }
 
 /**
