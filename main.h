@@ -124,10 +124,6 @@ char *get_precision(char *p, params_t *params, va_list args);
 
 int print_from_to(char *start, char *stop, char *except);
 
-int print_rev(va_list args, params_t *params);
-
-int print_R(va_list args, params_t *params);
-
 int _putchar(int c);
 
 int _puts(char *str);
