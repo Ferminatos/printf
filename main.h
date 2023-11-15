@@ -22,7 +22,7 @@
 /**
  * struct parameters - parameters of the printf function structure definition
  *
- * @unsign: flag for unsigned value 
+ * @unsign: flag for unsigned value
  *
  * @plus_flag: flag for if + specified
  * @space_flag: flag for if ' ' specified
@@ -121,8 +121,6 @@ char *get_width(char *s, params_t *params, va_list ap);
 void init_params(params_t *params, va_list args);
 
 char *get_precision(char *p, params_t *params, va_list args);
-
-int print_from_to(char *start, char *stop, char *except);
 
 int _putchar(int c);
 
