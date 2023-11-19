@@ -21,6 +21,8 @@ int (*get_specifier(char *s))(va_list args, params_t *params)
 			{"X", print_X},
 			{"p", print_add},
 			{"S", print_S},
+			{"r", print_rev},
+			{"R", print_R},
 			{NULL, NULL}
 
 	};

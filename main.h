@@ -100,6 +100,10 @@ int print_X(va_list args, params_t *params);
 
 int print_S(va_list args, params_t *params);
 
+int print_rev(va_list args, params_t *params);
+
+int print_R(va_list args, params_t *params);
+
 int print_add(va_list args, params_t *params);
 
 int _isdigit(int c);
